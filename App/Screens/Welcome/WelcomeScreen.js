@@ -15,8 +15,8 @@ handleGoogleLogin = () => {
 handleNewAccount = () => {
   // 1. Fetch fake user info
   // 2. Navigate to ChatScreen
-  const { goToChat } = this.props;
-  goToChat();
+  const { newAccount } = this.props;
+  newAccount();
 }
   render() {
     return (

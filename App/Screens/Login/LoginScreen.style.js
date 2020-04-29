@@ -4,7 +4,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 
 export const style = StyleSheet.create({
   container: {
-    backgroundColor: 'teal', 
+    backgroundColor: 'rgb(120,120,255)',
     height: '100%', 
     width: '100%', 
     justifyContent: 'center', 
