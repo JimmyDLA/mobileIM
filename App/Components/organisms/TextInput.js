@@ -8,16 +8,57 @@ import {
 import { style } from './TextInput.style';
 
 export class TextInput extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: ''
+    }
+  }
+
+  handleChangeText = text => {
+    const {
+      onChange,
+      input: {
+        onChange: inputOnChange,
+      },
+    } = this.props;
+
+    if (onChange) {
+      onChange(text);
+    }
+    if (inputOnChange) {
+      inputOnChange(text);
+    }
+    this.setState({ text });
+  }
+
+  handleSend = () => {
+    const { onSend } = this.props;
+    onSend();
+    this.handleChangeText('');
+    this.input.clear()
+  }
+
   render() {
-    const { styles, placeholder } = this.props;
+    const { 
+      styles, 
+      placeholder, 
+      returnKeyType,
+    } = this.props;
+
     return (
       <View style={style.container}>
         <Input
+          ref={ref => this.input = ref}
           style={[style.input, styles]}
           placeholder={placeholder || "..."}
+          onChangeText={this.handleChangeText}
+          onSubmitEditing={this.handleSend}
+          blurOnSubmit={false} 
           autoCorrect
+          returnKeyType={returnKeyType || 'go'}
         />
-        <TouchableOpacity style={style.sendButton}>
+        <TouchableOpacity onPress={this.handleSend} style={style.sendButton}>
           <Text style={style.sendText}>
             Send
           </Text>

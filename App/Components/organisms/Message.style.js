@@ -30,7 +30,10 @@ export const style = StyleSheet.create({
     color: 'white',
     fontSize: hp(3),
   },
-  self: { 
+  selfContainer: { 
     justifyContent: 'flex-end',
+  },
+  selfMessage: { 
+    backgroundColor: 'rgb(18,150,250)',
   },
 })

@@ -1,8 +1,21 @@
 import { connect } from 'react-redux';
+import { reduxForm } from 'redux-form';
 import { goBack, sendMessage } from 'App/Redux/modules/chat';
 import { ChatScreen } from './ChatScreen';
 
+export const formConfig = {
+  form: 'messenger',
+  persistentSubmitErrors: false,
+};
+
 mapStateToProp = ({
+  form: {
+    messenger: {
+      values: {
+        message ='',
+      } = {},
+    } = {},
+  } = {},
   welcome: {
     user
   } = {},
@@ -10,8 +23,9 @@ mapStateToProp = ({
     messageLog
   }
 }) => ({
-  user,
   messageLog,
+  message,
+  user,
 });
 
 mapDispatchToProps = {
@@ -22,4 +36,6 @@ mapDispatchToProps = {
 export default connect(
   mapStateToProp,
   mapDispatchToProps,
-)(ChatScreen);
+  null, 
+  { forwardRef: true }
+)(reduxForm(formConfig)(ChatScreen));

@@ -10,6 +10,7 @@ export class Message extends React.PureComponent {
   render() {
     const { data: { pic, name, email, message }, myEmail } = this.props;
     const isSelf = myEmail === email;
+
     return !isSelf ? (
       <View style={style.container}>
         <Image style={style.pic} source={{uri: pic}} />
@@ -23,8 +24,8 @@ export class Message extends React.PureComponent {
         </View>
       </View>
     ) : (
-      <View style={[style.container, style.self]}>
-        <View style={style.messageContainer}>
+      <View style={[style.container, style.selfContainer]}>
+        <View style={[style.messageContainer, style.selfMessage]}>
           <Text style={style.name}>
             {name}:
           </Text>
