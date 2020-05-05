@@ -39,7 +39,7 @@ function createSocketChannel (socket) {
     socket.onmessage = event => {
       let { data } = event;
       data = JSON.parse(data);
-        emit({ data });  
+      emit({ data });  
     };
     socket.onerror = event => {
       console.log(`[socket onerror]: ${event}`);

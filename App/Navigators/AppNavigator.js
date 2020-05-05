@@ -19,8 +19,8 @@ const StackNavigator = createStackNavigator(
       screen: WelcomeScreen,
       navigationOptions: {
         headerStyle: {
-          backgroundColor: 'rgb(200,200,200)',
-          borderColor: 'rgb(200,200,200)',
+          backgroundColor: 'rgb(240,240,240)',
+          borderColor: 'rgb(240,240,240)',
           borderBottomWidth: 0,
         },
       }
