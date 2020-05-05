@@ -1,4 +1,5 @@
 const express = require('express');
+const shortid = require('shortid');
 const WebSocket = require('ws');
 
 
@@ -11,8 +12,9 @@ let id;
 app.listen(PORT, () => console.log(`listening to requests on port ${PORT}`));
 
 wss.on('connection', function connection(ws) {
-  id = Math.random();
+  id = shortid.generate();
   console.log('connection is established : ' + id);
+
   CLIENTS[id] = ws;
   CLIENTS.push(ws);
 
@@ -20,7 +22,6 @@ wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
     console.log('received: %s', JSON.parse(message));
     sendAll(message);
-    // wss.send(message);
   });
 });
 

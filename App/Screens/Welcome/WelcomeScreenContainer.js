@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
-import { googleLogin, goToChat } from 'App/Redux/modules/welcome';
+import { googleLogin, newAccount } from 'App/Redux/modules/welcome';
 import { WelcomeScreen } from './WelcomeScreen';
 
 mapDispatchToProps = {
   googleLogin,
-  goToChat,
+  newAccount,
 };
 
 export default connect(

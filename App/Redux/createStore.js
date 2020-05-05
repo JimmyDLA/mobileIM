@@ -22,7 +22,8 @@ const persistConfig = {
   key: 'root',
   storage,
   blacklist: [
-    'game',
+    'welcome',
+    'chat',
   ],
 }
 
