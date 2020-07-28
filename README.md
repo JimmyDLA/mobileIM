@@ -1,8 +1,10 @@
 # MobileIM
 
 Mobile Instant Messanger
-![Logo](./App/Assets/Images/mobileIM_logo.png)
-![alt-text](./App/Assets/Images/chat-loop.gif)
+<!-- ![Logo](./App/Assets/Images/splash_screen.png) -->
+<img src="./App/Assets/Images/splash_screen.png" alt="alt text" width="275" height="whatever"/>
+
+![Alt Text](https://media.giphy.com/media/ME4WrYg4CRKwHUfjyA/giphy.gif)
 
 
 
