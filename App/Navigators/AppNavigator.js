@@ -1,8 +1,9 @@
-import { createAppContainer, createStackNavigator } from 'react-navigation'
+import { createAppContainer, createStackNavigator } from 'react-navigation';
 
 import WelcomeScreen from 'App/Screens/Welcome/WelcomeScreenContainer';
 import LoginScreen from 'App/Screens/Login/LoginScreenContainer';
 import ChatScreen from 'App/Screens/Chat/ChatScreenContainer';
+import { Colors } from '../Theme';
 
 /**
  * The root screen contains the application's navigation.
@@ -19,18 +20,24 @@ const StackNavigator = createStackNavigator(
       screen: WelcomeScreen,
       navigationOptions: {
         headerStyle: {
-          backgroundColor: 'rgb(240,240,240)',
-          borderColor: 'rgb(240,240,240)',
+          backgroundColor: Colors.darkGray,
+          borderColor: Colors.darkGray,
           borderBottomWidth: 0,
         },
-      }
+      },
     },
     ChatScreen: {
       screen: ChatScreen,
       navigationOptions: {
-        title: 'Chat'
+        title: 'Chat',
+        headerStyle: {
+          backgroundColor: Colors.darkGray,
+          borderColor: Colors.lightGray,
+          borderBottomWidth: 0,
+        },
+        headerTintColor: '#fff',
       },
-    }
+    },
   },
   {
     // By default the application will show the splash screen
@@ -38,17 +45,18 @@ const StackNavigator = createStackNavigator(
     mode: 'card',
     headerMode: 'screen',
   }
-)
+);
 
 const RootNavigator = createStackNavigator(
   {
     MainScreen: StackNavigator,
     Modal: LoginScreen,
-  }, {
+  },
+  {
     mode: 'modal',
     headerMode: 'none',
     transparentCard: false,
   }
-)
+);
 
-export default createAppContainer(RootNavigator)
+export default createAppContainer(RootNavigator);

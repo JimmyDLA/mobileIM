@@ -1,5 +1,9 @@
 import { StyleSheet, Platform } from 'react-native';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+import { Colors } from '../../Theme';
 
 const containerDropShadow = Platform.select({
   android: {
@@ -17,21 +21,20 @@ export const style = StyleSheet.create({
   button: {
     width: 250,
     height: 50,
-    backgroundColor: 'rgb(52, 152, 219)',
+    backgroundColor: Colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: 'silver',
+    borderRadius: 10,
     ...containerDropShadow,
     marginTop: 20,
   },
-  container: { 
+  container: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  label: { 
+  label: {
     fontSize: 16,
     color: 'white',
-    textAlign: 'center'
+    textAlign: 'center',
   },
 });

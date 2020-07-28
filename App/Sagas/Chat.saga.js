@@ -1,6 +1,6 @@
-import { take, call, put, takeEvery } from 'redux-saga/effects'
+import { take, call, put, select, takeEvery } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
-import NavigationService from 'App/Services/NavigationService'
+import NavigationService from 'App/Services/NavigationService';
 import { incomingMessage, SEND_MESSAGE, GO_BACK, START_CHAT } from '../Redux/modules/chat';
 
 /**
@@ -18,34 +18,35 @@ export function* doGoBack() {
   }
 }
 
-const createSocketConnection = () => new Promise((resolve, reject) => {
-  try {
-    const socketUrl = 'ws://localhost:4001/';
-    const socket = new WebSocket(socketUrl);
+const createSocketConnection = () =>
+  new Promise((resolve, reject) => {
+    try {
+      const socketUrl = 'ws://localhost:4001/';
+      const socket = new WebSocket(socketUrl);
 
-    socket.onopen = () => {
-      console.log('socket is open');
-      resolve(socket);
-    };
-    return socket;
-  } catch (error) {
-    reject(error);
-  }
-});
+      socket.onopen = () => {
+        console.log('socket is open');
+        resolve(socket);
+      };
+      return socket;
+    } catch (error) {
+      reject(error);
+    }
+  });
 
-function createSocketChannel (socket) {
-  return eventChannel(emit => {    
-
-    socket.onmessage = event => {
+function createSocketChannel(socket) {
+  return eventChannel((emit) => {
+    socket.onmessage = (event) => {
       let { data } = event;
       data = JSON.parse(data);
-      emit({ data });  
+      debugger;
+      emit({ data });
     };
-    socket.onerror = event => {
+    socket.onerror = (event) => {
       console.log(`[socket onerror]: ${event}`);
       emit({ error: event });
     };
-    socket.onclose = event => {
+    socket.onclose = (event) => {
       console.log(`[socket onerror]: ${event}`);
       emit({ data: socket });
     };
@@ -60,30 +61,38 @@ function createSocketChannel (socket) {
 
 function* doStartChat() {
   try {
+    const {
+      user: { email },
+    } = yield select((state) => state.welcome);
+
     socket = yield call(createSocketConnection);
     socketChannel = yield call(createSocketChannel, socket);
-    
+
     yield NavigationService.navigate('ChatScreen');
 
     while (socketChannel) {
+      let {
+        user: { email },
+      } = yield select((state) => state.welcome);
       const { data } = yield take(socketChannel);
-      if (data.message) {
-        yield put(incomingMessage(data))
+      if (data.message && email !== data.email) {
+        yield put(incomingMessage(data));
       }
     }
   } catch (error) {
-      console.log(`[catch error] ${error}`);
+    console.log(`[catch error] ${error}`);
   }
 }
 
 function* doSendMessage(action) {
   try {
     let { data } = action;
-    
+    yield put(incomingMessage(data));
+
     data = JSON.stringify(data);
     socket.send(data);
   } catch (error) {
-    console.log(`[catch error] ${error}`)
+    console.log(`[catch error] ${error}`);
   }
 }
 

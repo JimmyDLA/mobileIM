@@ -1,6 +1,8 @@
-import { StyleSheet } from 'react-native'
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-
+import { StyleSheet } from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 export const style = StyleSheet.create({
   container: {
@@ -9,31 +11,33 @@ export const style = StyleSheet.create({
     justifyContent: 'flex-start',
     paddingBottom: 10,
   },
-  pic: { 
-    height: hp(8),
-    width: hp(8),
+  pic: {
+    height: hp(7),
+    width: hp(7),
     borderRadius: 40,
   },
-  messageContainer: { 
-    backgroundColor: 'rgb(87,211,207)',
+  messageContainer: {
+    backgroundColor: 'rgba(150,150,150,0.5)',
     padding: wp(1.5),
     paddingHorizontal: wp(5),
     borderRadius: 20,
-    maxWidth: wp(76),
+    maxWidth: wp(73.5),
     marginLeft: wp(3),
     marginRight: wp(3),
+    justifyContent: 'center',
   },
-  name: { 
+  name: {
     color: 'white',
+    textDecorationLine: 'underline',
   },
-  message: { 
+  message: {
     color: 'white',
-    fontSize: hp(3),
+    fontSize: hp(2),
   },
-  selfContainer: { 
+  selfContainer: {
     justifyContent: 'flex-end',
   },
-  selfMessage: { 
+  selfMessage: {
     backgroundColor: 'rgb(18,150,250)',
   },
-})
+});

@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
+import { StatusBar } from 'react-native';
 import { persistStore } from 'redux-persist';
 import { GoogleSignin } from '@react-native-community/google-signin';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { configureStore } from 'App/Redux/createStore';
-import RootScreen from './Containers/Root/RootScreen'
+import RootScreen from './Containers/Root/RootScreen';
 
 const store = configureStore();
 const persistor = persistStore(store);
 GoogleSignin.configure({
-  iosClientId: '653599359670-8p464sin6s79mcc7ou5csfjqj0muf1in.apps.googleusercontent.com'
+  iosClientId: '653599359670-8p464sin6s79mcc7ou5csfjqj0muf1in.apps.googleusercontent.com',
 });
-
 
 export default class App extends Component {
   render() {
@@ -29,8 +29,9 @@ export default class App extends Component {
          */}
         <PersistGate loading={null} persistor={persistor}>
           <RootScreen />
+          <StatusBar barStyle="light-content" />
         </PersistGate>
       </Provider>
-    )
+    );
   }
 }
