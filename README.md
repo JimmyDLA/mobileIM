@@ -1,7 +1,5 @@
-# MobileIM
+# MobileIM - Mobile Instant Messanger
 ![Logo](./App/Assets/Images/dark_logo.png)
-
-Mobile Instant Messanger
 
 <img src="./App/Assets/Images/splash_screen.png" alt="alt text" width="275" height="whatever"/>
 
