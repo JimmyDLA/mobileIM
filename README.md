@@ -12,12 +12,11 @@ This is a messagner using Google oAuth to sign in. Allows anyone to jump into th
 ## Getting Started
 
 ### Dependencies
-* React, React Native, Xcode, Android Studio, Axios, Redux, Redux-Sagas, Node, Express Server, Web Socket, and more.
-
 * __MacOS:__ 
   * iOS & Android app
 * __Windows:__ 
   * Android app (only)
+* React, React Native, Xcode, Android Studio, Axios, Redux, Redux-Sagas, Node, Express Server, Web Socket, and more.
 
 ### Installing
 
