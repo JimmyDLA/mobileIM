@@ -1,5 +1,6 @@
-platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+platform :ios, '12.4'
+
 
 target 'MobileIM' do
   # Pods for MobileIM
@@ -33,12 +34,22 @@ target 'MobileIM' do
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
-  target 'MobileIMTests' do
-    inherit! :search_paths
-    # Pods for testing
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
+  post_install do |installer|
+    ## Fix for XCode 12.5 beta
+    find_and_replace("../node_modules/react-native/React/CxxBridge/RCTCxxBridge.mm",
+    "_initializeModules:(NSArray<id<RCTBridgeModule>> *)modules", "_initializeModules:(NSArray<Class> *)modules")
+    find_and_replace("../node_modules/react-native/ReactCommon/turbomodule/core/platform/ios/RCTTurboModuleManager.mm",
+    "RCTBridgeModuleNameForClass(module))", "RCTBridgeModuleNameForClass(Class(module)))")
+  end
+end
+
+target 'MobileIMTests' do
+  inherit! :search_paths
+  # Pods for testing
   end
   use_native_modules!
-end
 target 'MobileIM-tvOS' do
   # Pods for MobileIM-tvOS
   target 'MobileIM-tvOSTests' do
@@ -46,3 +57,18 @@ target 'MobileIM-tvOS' do
     # Pods for testing
   end
 end
+
+def find_and_replace(dir, findstr, replacestr)
+  Dir[dir].each do |name|
+      text = File.read(name)
+      replace = text.gsub(findstr,replacestr)
+      if text != replace
+          puts "Fix: " + name
+          File.open(name, "w") { |file| file.puts replace }
+          STDOUT.flush
+      end
+  end
+  Dir[dir + '*/'].each(&method(:find_and_replace))
+end
+
+
